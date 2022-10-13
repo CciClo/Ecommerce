@@ -17,11 +17,15 @@ html {
 .body{
   margin: 0;
   background-color: var(--body-color);
+  font-family: 'Bangers', cursive;
+  
+  
   /* outline: 1px solid green; */
 }
 
 h1 {
   font-size: 40px;
+  font-family: 'Fredericka the Great', cursive;
   width: 100%;
   text-align: center;
   color: var(--letras-color);
@@ -329,6 +333,7 @@ span {
   top: -1%;
   padding: 2vw;
   overflow-y: scroll;
+  font-family: 'Fredericka the Great', cursive;
 }
 
 @media (max-width: 500px) {
