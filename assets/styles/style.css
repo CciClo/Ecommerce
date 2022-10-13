@@ -3,6 +3,7 @@
   --main-color: rgb(27 27 27); 
   --menu-color: rgb(247 169 38);
   --letras-color: rgb(255 255 255);
+  --letras-product: rgb(247, 101, 38);
   --oferta-color: rgb(47 47 47);
   --oferta2-color: rgb(237 64 30);
 }
@@ -234,6 +235,7 @@ h2 {
 
 h3 {
   font-size: 1.6vw;
+  color: var(--letras-product)
 }
 
 @media (max-width: 500px) {
@@ -426,6 +428,10 @@ span {
   .contact img {
     width: 30px;
   }
+}
+
+label {
+  color: var(--menu-color)
 }
 
 .referents {
