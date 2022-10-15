@@ -25,7 +25,7 @@ cart.addEventListener("click", (e) => {
 
 addEventListener("click", (e) => {
   if (e.target.classList.contains("btn-mas")){
-    const imageProduct = e.target.parentElement.firstElementChild.outerHTML;
+    let imageProduct = e.target.parentElement.firstElementChild.outerHTML;
     const nameProduct = e.target.parentElement.childNodes[3].textContent;
     const stock = e.target.parentElement.childNodes[5].textContent;
     const priceProduct = e.target.parentElement.childNodes[7].textContent.split(" ");
@@ -45,28 +45,28 @@ addEventListener("click", (e) => {
 
 
 function createCart() {
-  const elements = cartArray.map((cart) => {
-    const boolean = cart.priceProduct.length > 1;
+  const elements = cartArray.map((cart2) => {
+    const boolean = cart2.priceProduct.length > 1;
     let price1;
     let price2;
     if (boolean){
-      price1 = cart.priceProduct[1];
-      price2 = Number(cart.priceProduct[1].replace("$",""))*cart.amountCart;
+      price1 = cart2.priceProduct[1];
+      price2 = Number(cart2.priceProduct[1].replace("$",""))*cart2.amountCart;
     }else {
-      price1 = cart.priceProduct[0];
-      price2 = Number(cart.priceProduct[0].replace("$",""))*cart.amountCart;
+      price1 = cart2.priceProduct[0];
+      price2 = Number(cart2.priceProduct[0].replace("$",""))*cart2.amountCart;
     }
     return  `
     <div class="product-in-cart">
-      ${cart.imageProduct}
+      ${cart2.imageProduct}
       <div class="cart-title">
-        <h3>${cart.nameProduct}</h3>
+        <h3>${cart2.nameProduct}</h3>
         ${boolean ? `<p><span>${price1}</span>$${price2}</p>` : `<p><span>${price1}</span>$${price2}</p>`}
         <div>
-          <img id="${cart.nameProduct}" class="btn-rest1" src="./assets/icons/minus-small.svg">
-          <p>${cart.amountCart}</p>
-          <img id="${cart.nameProduct}" class="btn-sum1" src="./assets/icons/plus-small.svg">
-          <img id="${cart.nameProduct}" class="btn-trash" src="./assets/icons/trash.svg">
+          <img id="${cart2.nameProduct}" class="btn-rest1" src="./assets/icons/minus-small.svg">
+          <p>${cart2.amountCart}</p>
+          <img id="${cart2.nameProduct}" class="btn-sum1" src="./assets/icons/plus-small.svg">
+          <img id="${cart2.nameProduct}" class="btn-trash" src="./assets/icons/trash.svg">
         </div>
       </div>
     </div>
@@ -75,7 +75,14 @@ function createCart() {
   productCart.innerHTML = elements;
 }
 
-function checkCart (a,b,c,e,f) {
+function checkCart (imageProduct,nameProduct,priceProduct,amountCart,f) {
+  let index = cartArray.findIndex((cart1) => cart1.nameProduct == nameProduct)
+  if (index === -1) {
+    cartArray.push({imageProduct,nameProduct,priceProduct,amountCart,stock:Number(f.replace("Stock:", ""))});
+  } else if (index !== -1 && cartArray[index].amountCart < cartArray[index].stock) {
+    cartArray[index].amountCart++;
+  }
+  /*
   let boolean = true;
   if(cartArray.length > 0) {
     for (let i of cartArray) {
@@ -90,6 +97,7 @@ function checkCart (a,b,c,e,f) {
   if (boolean) {
     cartArray.push({imageProduct:a,nameProduct:b,priceProduct:c,amountCart:e,stock:Number(f.replace("Stock:", ""))});
   }
+  */
 }
 
 
